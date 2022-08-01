@@ -14,7 +14,13 @@ Routes.post("/teste-ronaldo", (req, res) => {
         ...req.body
     }
 
+    return res.json(Enviado)
+})
 
+Routes.post("/teste-ronaldo/:id", (req, res) => {
+    const Enviado = {
+        "Parametro enviado": req.params.id,
+    }
 
     return res.json(Enviado)
 })
