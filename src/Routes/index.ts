@@ -8,7 +8,7 @@ Routes.get("/", (req, res) => {
     })
 })
 
-Routes.get("/home", (req, res) => {
+Routes.get("/teste-ronaldo", (req, res) => {
     const Enviado = {
         "Enviado": "Ronaldo mandou",
         ...req.body
