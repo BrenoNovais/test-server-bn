@@ -8,7 +8,7 @@ Routes.get("/", (req, res) => {
     })
 })
 
-Routes.get("/teste-ronaldo", (req, res) => {
+Routes.post("/teste-ronaldo", (req, res) => {
     const Enviado = {
         "Enviado": "Ronaldo mandou",
         ...req.body
