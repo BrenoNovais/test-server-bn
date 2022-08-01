@@ -17,7 +17,7 @@ Routes.post("/teste-ronaldo", (req, res) => {
     return res.json(Enviado)
 })
 
-Routes.post("/teste-ronaldo/:id", (req, res) => {
+Routes.post("/teste-parametro/:id", (req, res) => {
     const Enviado = {
         "Parametro enviado": req.params.id,
     }
