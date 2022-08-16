@@ -11,12 +11,11 @@ module.exports = {
 
             cb(null, path.resolve(__dirname, "..", "..", "tmp", "uploads"))
         },
-    }),
 
+    }),
     limits: {
         fileSize: 2 * 1024 * 1024
     },
-    
     fileFilter: async (req: Request, file: any, cb: any) => {
         const allowedMines = [
             "image/jpeg",

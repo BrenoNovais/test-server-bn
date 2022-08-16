@@ -29,9 +29,15 @@ export class UsuariosController {
     static async store_avatar(req: Request, res: Response) {
         try {
 
-            let caminho = req.file!.path
+            const caminho = req.file?.path
 
-            let nome_arquivo = uuid() + req.file?.originalname.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z._])/g, '')
+            if (!caminho) {
+                return res.status(400).json({
+                    "error": "caminho do arquivo inválido"
+                })
+            }
+
+            let nome_arquivo = uuid()// + req.file?.originalname.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z._])/g, '')
 
             let arquivo_upload = fs.readFileSync(String(req.file?.path))
 
@@ -39,7 +45,7 @@ export class UsuariosController {
 
             const { data, error } = await supabase
                 .storage
-                .from("avatar")
+                .from("bucket-teste")
                 .upload(url, arquivo_upload, {
                     cacheControl: '3600',
                     upsert: false,
@@ -60,8 +66,6 @@ export class UsuariosController {
                     avatar: url
                 }
             }) */
-            
-            if (!caminho) {return}
 
             fs.unlink(caminho, ((err: any) => {
                 if (err) console.log(err);
