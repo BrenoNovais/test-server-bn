@@ -1,5 +1,5 @@
 import bcrypt, { hash } from "bcrypt"
-import prisma from "../src/Database/Prisma"
+import prisma from "../src/Database/PrismaClient"
 
 async function seed() {
     try {
