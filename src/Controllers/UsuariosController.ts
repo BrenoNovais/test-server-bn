@@ -78,7 +78,7 @@ export class UsuariosController {
                 "message": "salvo"
             })
         } catch (error) {
-
+            console.log(error)
         }
     }
 }
