@@ -10,3 +10,5 @@ Routes.use(UsuariosRoute)
 Routes.use(RonaldoRoutes)
 
 Routes.use(HorarioBackupRoute)
+
+export default Routes
