@@ -1,12 +1,12 @@
 import { Router } from "express"
 import RonaldoController from "../Controllers/Ronaldo"
 
-export const RonaldoRoutes = Router()
+export const RonaldoRoute = Router()
 
-RonaldoRoutes.get('/', RonaldoController.index1)
+RonaldoRoute.get('/', RonaldoController.index1)
 
-RonaldoRoutes.post("/teste-ronaldo", RonaldoController.index2)
+RonaldoRoute.post("/teste-ronaldo", RonaldoController.index2)
 
-RonaldoRoutes.post("/teste-parametro/:id", RonaldoController.store)
+RonaldoRoute.post("/teste-parametro/:id", RonaldoController.store)
 
-export default RonaldoRoutes
+export default RonaldoRoute
