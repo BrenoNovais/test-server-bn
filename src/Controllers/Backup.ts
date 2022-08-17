@@ -33,7 +33,7 @@ export class BackupController {
 
             let arquivo_buffer = fs.readFileSync(String(req.file?.path))
 
-            // função que remove ascentos e caracteres especiais
+            // função que remove ascentos e caracteres especiais 
             let nome = originalname.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z._])/g, '')
 
             let url = `empresa/${id_tenant}/backup/${nome}`
