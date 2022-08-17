@@ -10,37 +10,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuarios {
-  id   Int    @id @default(autoincrement())
-  nome String
-  email String @unique
-  senha String 
-  avatar String? @default("")
-}
-
-model Users {
-  id     Int     @id @default(autoincrement())
-  nome   String
-  email  String  @unique
-  senha  String
-  avatar String? @default("public/avatarpadrao.jpg")
-}
-
-enum acao {
-  incluir
-  excluir
-  alterar
-}
-
-model log {
-  id             Int     @id @default(autoincrement())
-  id_usuario     Int
-  usuario        String
-  administrador  Boolean
-  acao           acao
-  tabela         String
-  id_modificacao Int
+model tenant {
+  id      Int       @id @default(autoincrement())
+  nome    String
+  cnpj    String    @unique @db.VarChar(14)
+  users   Users[]
+  backups backups[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+}
+
+model Users {
+  id        Int     @id @default(autoincrement())
+  id_tenant Int
+  id_user Int?
+  nome      String
+  email     String  @unique
+  senha     String
+  avatar    String? @default("public/avatarpadrao.jpg")
+  tenant    tenant? @relation(fields: [id_tenant], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@unique([id, id_tenant])
+  @@unique([id_user, id_tenant])
+}
+
+model backups {
+  id        Int     @id @default(autoincrement())
+  id_tenant Int
+  id_backup Int?
+  url       String
+  tenant    tenant? @relation(fields: [id_tenant], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@unique([id, id_tenant])
+  @@unique([id_backup, id_tenant])
 }

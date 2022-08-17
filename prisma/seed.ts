@@ -3,16 +3,25 @@ import prisma from "../src/Database/PrismaClient"
 
 async function seed() {
     try {
-        bcrypt.hash("@senhateste", 5, async (err, hash) => {
 
-            await prisma.users.create({
-                data: {
-                    nome: "admin",
-                    email: "admin@admin",
-                    senha: hash
-                }
-            })
+        await prisma.tenant.create({
+            data: {
+                nome: "morinfo",
+                cnpj: "58126228000102"
+            }
         })
+
+        const hash = await bcrypt.hash("senhateste", 5)
+
+        await prisma.users.create({
+            data: {
+                id_tenant: 1,
+                nome: "admin",
+                email: "admin@admin",
+                senha: String(hash)
+            }
+        })
+
     } catch (error) {
         console.log(error)
     }

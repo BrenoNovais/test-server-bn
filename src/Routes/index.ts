@@ -1,5 +1,5 @@
 import { Router } from "express";
-import HorarioBackupRoute from "./HorarioBackup";
+import HorarioBackupRoute, { BackupRoute } from "./Backup";
 import RonaldoRoutes from "./Ronaldo";
 import UsuariosRoute from "./UsuariosRoute";
 
@@ -9,6 +9,6 @@ Routes.use(UsuariosRoute)
 
 Routes.use(RonaldoRoutes)
 
-Routes.use(HorarioBackupRoute)
+Routes.use(BackupRoute)
 
 export default Routes

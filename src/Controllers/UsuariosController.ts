@@ -10,13 +10,13 @@ export class UsuariosController {
     static async store(req: Request, res: Response) {
 
         try {
-            
-            await prisma.usuarios.create({
+
+            await prisma.users.create({
                 data: {
                     ...req.body
                 }
             })
-    
+
             return res.json({
                 "message": "usuario registado"
             })
@@ -29,29 +29,33 @@ export class UsuariosController {
     static async store_avatar(req: Request, res: Response) {
         try {
 
-            const caminho = req.file?.path
+            const { path, originalname, mimetype } = req.file!
+            const { id_tenant } = req.body
 
-            if (!caminho) {
+            if (!path) {
                 return res.status(400).json({
                     "error": "caminho do arquivo inválido"
                 })
             }
 
-            let nome_arquivo = uuid()// + req.file?.originalname.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z._])/g, '')
+            let arquivo_buffer = fs.readFileSync(String(path))
 
-            let arquivo_upload = fs.readFileSync(String(req.file?.path))
+            let nome = uuid() + originalname.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z._])/g, '')
 
-            let url = `public/${nome_arquivo}`
+            let url = `empresa/${id_tenant}/avatars/${nome}`
 
             const { data, error } = await supabase
                 .storage
-                .from("bucket-teste")
-                .upload(url, arquivo_upload, {
+                .from("teste-server")
+                .upload(url, arquivo_buffer, {
                     cacheControl: '3600',
                     upsert: false,
-                    contentType: req.file!.mimetype
+                    contentType: mimetype
                 })
-            const uploader = multer({ dest: "Uploads/" })
+
+            if (!data) {
+                return res.status(500).json(error)
+            }
 
             /*  LINK PRONTO P/ USO
             const {signedURL} = await supabase
@@ -67,16 +71,17 @@ export class UsuariosController {
                 }
             }) */
 
-            fs.unlink(caminho, ((err: any) => {
+            fs.unlink(path, ((err: any) => {
                 if (err) console.log(err);
                 else {
-                  console.log('aquivo temporario excluido. . .');
+                    console.log('aquivo temporario excluido. . .');
                 }
             }));
 
             return res.json({
                 "message": "salvo"
             })
+
         } catch (error) {
             console.log(error)
         }
