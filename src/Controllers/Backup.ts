@@ -1,12 +1,19 @@
 import { request, Request, Response } from "express";
-import { v4 as uuid } from "uuid"
 import fs from 'fs'
 import supabase from "../Supabase/CreateClient";
 import prisma from "../Database/PrismaClient";
 
 export class BackupController {
 
-    static Hora1(req: Request, res: Response) {
+    static async Hora1(req: Request, res: Response) {
+
+        const {body} = req
+
+        const busca_bkps = await prisma.bkps.create({
+            data: {
+                ...body
+            }
+        })
         return res.json({
             backup: true
         })
@@ -22,8 +29,11 @@ export class BackupController {
 
         try {
 
+            
             const { path, originalname, mimetype } = req.file!
             const { id_tenant } = req.body
+
+            console.log(mimetype)
 
             if (!path) {
                 return res.status(400).json({

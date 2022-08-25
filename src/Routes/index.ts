@@ -1,5 +1,5 @@
 import { Router } from "express";
-import HorarioBackupRoute, { BackupRoute } from "./Backup";
+import BackupRoute from "./Backup";
 import RonaldoRoutes from "./Ronaldo";
 import UsuariosRoute from "./UsuariosRoute";
 

@@ -19,12 +19,13 @@ model tenant {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  bkps       bkps[]
 }
 
 model Users {
   id        Int     @id @default(autoincrement())
   id_tenant Int
-  id_user Int?
+  id_user   Int?
   nome      String
   email     String  @unique
   senha     String
@@ -50,4 +51,24 @@ model backups {
 
   @@unique([id, id_tenant])
   @@unique([id_backup, id_tenant])
+}
+
+model bkps {
+  id             Int     @id @default(autoincrement())
+  id_tenant      Int
+  id_bkps        Int?
+  nome           String
+  db_user        String
+  db_password    String
+  db_name        String
+  horarios_bkps  String
+  realiza_backup Boolean
+
+  tenant tenant? @relation(fields: [id_tenant], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@unique([id, id_tenant])
+  @@unique([id_bkps, id_tenant])
 }
