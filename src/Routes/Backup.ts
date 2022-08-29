@@ -9,4 +9,6 @@ BackupRoute.get('/horario-backup', BackupController.Hora1)
 
 BackupRoute.get('/horario-backup-false', BackupController.Hora2)
 
+BackupRoute.get('/empresas/:id', BackupController.empresas)
+
 export default BackupRoute

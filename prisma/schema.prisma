@@ -15,7 +15,7 @@ model tenant {
   nome    String
   cnpj    String  @unique @db.VarChar(14)
   users   Users[]
-  backups bkps[]
+  backups empresas[]
 
   created_at     DateTime         @default(now())
   updated_at     DateTime         @updatedAt
@@ -41,10 +41,10 @@ model Users {
   @@unique([id_user, id_tenant])
 }
 
-model bkps {
+model empresas {
   id        Int     @id @default(autoincrement())
   id_tenant Int
-  id_bkps   Int?
+  id_empresas   Int?
   nome      String
   tenant    tenant? @relation(fields: [id_tenant], references: [id])
 
@@ -52,7 +52,7 @@ model bkps {
   updated_at DateTime @updatedAt
 
   @@unique([id, id_tenant])
-  @@unique([id_bkps, id_tenant])
+  @@unique([id_empresas, id_tenant])
 }
 
 model bancos {
