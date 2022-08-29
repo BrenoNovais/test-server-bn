@@ -33,7 +33,7 @@ export class BackupController {
             const { path, originalname, mimetype } = req.file!
             const { id_tenant } = req.body
 
-            console.log(mimetype)
+            console.log(req.file)
 
             if (!path) {
                 return res.status(400).json({

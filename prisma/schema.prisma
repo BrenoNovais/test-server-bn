@@ -11,15 +11,17 @@ datasource db {
 }
 
 model tenant {
-  id      Int       @id @default(autoincrement())
+  id      Int     @id @default(autoincrement())
   nome    String
-  cnpj    String    @unique @db.VarChar(14)
+  cnpj    String  @unique @db.VarChar(14)
   users   Users[]
-  backups backups[]
+  backups bkps[]
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  bkps       bkps[]
+  created_at     DateTime         @default(now())
+  updated_at     DateTime         @updatedAt
+  bancos         bancos[]
+  diretorios_xml diretorios_xml[]
+  horarios       horarios[]
 }
 
 model Users {
@@ -39,36 +41,52 @@ model Users {
   @@unique([id_user, id_tenant])
 }
 
-model backups {
+model bkps {
   id        Int     @id @default(autoincrement())
   id_tenant Int
-  id_backup Int?
-  url       String
+  id_bkps   Int?
+  nome      String
   tenant    tenant? @relation(fields: [id_tenant], references: [id])
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@unique([id, id_tenant])
-  @@unique([id_backup, id_tenant])
+  @@unique([id_bkps, id_tenant])
 }
 
-model bkps {
-  id             Int     @id @default(autoincrement())
-  id_tenant      Int
-  id_bkps        Int?
-  nome           String
-  db_user        String
-  db_password    String
-  db_name        String
-  horarios_bkps  String
-  realiza_backup Boolean
+model bancos {
+  id            Int              @id @default(autoincrement())
+  id_tenant     Int
+  id_banco      Int
+  db_user       String
+  db_password   String
+  db_name       String
+  qtde_dias_bkp Int
+  diretorio_bkp String
+  horarios      horarios[]
+  diretorio_xml diretorios_xml[]
 
   tenant tenant? @relation(fields: [id_tenant], references: [id])
+}
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+model diretorios_xml {
+  id               Int     @id @default(autoincrement())
+  id_tenant        Int
+  id_diretorio_xml Int
+  id_bancos        Int?
+  diretorio_xml    String
+  bancos           bancos? @relation(fields: [id_bancos], references: [id])
+  tenant           tenant? @relation(fields: [id_tenant], references: [id])
+}
 
-  @@unique([id, id_tenant])
-  @@unique([id_bkps, id_tenant])
+model horarios {
+  id         Int     @id @default(autoincrement())
+  id_tenant  Int
+  id_horario Int
+  horario    Int
+  bancos     bancos? @relation(fields: [id_bancos], references: [id])
+  id_bancos  Int?
+
+  tenant tenant? @relation(fields: [id_tenant], references: [id])
 }
