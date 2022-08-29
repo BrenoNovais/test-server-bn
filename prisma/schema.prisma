@@ -11,9 +11,9 @@ datasource db {
 }
 
 model tenant {
-  id      Int     @id @default(autoincrement())
+  id      Int        @id @default(autoincrement())
   nome    String
-  cnpj    String  @unique @db.VarChar(14)
+  cnpj    String     @unique @db.VarChar(14)
   users   Users[]
   backups empresas[]
 
@@ -42,11 +42,12 @@ model Users {
 }
 
 model empresas {
-  id        Int     @id @default(autoincrement())
-  id_tenant Int
-  id_empresas   Int?
-  nome      String
-  tenant    tenant? @relation(fields: [id_tenant], references: [id])
+  id          Int      @id @default(autoincrement())
+  id_tenant   Int
+  id_empresas Int?
+  nome        String
+  bancos      bancos[]
+  tenant      tenant?  @relation(fields: [id_tenant], references: [id])
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -58,16 +59,19 @@ model empresas {
 model bancos {
   id            Int              @id @default(autoincrement())
   id_tenant     Int
+  id_empresas   Int?
   id_banco      Int
   db_user       String
   db_password   String
   db_name       String
   qtde_dias_bkp Int
   diretorio_bkp String
+  
   horarios      horarios[]
   diretorio_xml diretorios_xml[]
 
-  tenant tenant? @relation(fields: [id_tenant], references: [id])
+  tenant   tenant?   @relation(fields: [id_tenant], references: [id])
+  empresas empresas? @relation(fields: [id_empresas], references: [id])
 }
 
 model diretorios_xml {
