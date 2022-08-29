@@ -9,7 +9,7 @@ export class BackupController {
 
         const {body} = req
 
-        const busca_bkps = await prisma.bkps.create({
+        const busca_empresas = await prisma.empresas.create({
             data: {
                 ...body
             }
@@ -29,7 +29,7 @@ export class BackupController {
 
         const {body} = req
 
-        const busca_bkps = await prisma.bkps.create({
+        const busca_empresas = await prisma.empresas.create({
             data: {
                 ...body
             }
