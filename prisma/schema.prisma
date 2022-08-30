@@ -20,7 +20,7 @@ model tenant {
   created_at     DateTime         @default(now())
   updated_at     DateTime         @updatedAt
   bancos         bancos[]
-  diretorios_xml diretorios_xml[]
+  diretorios_xmls diretorios_xmls[]
   horarios       horarios[]
 }
 
@@ -68,18 +68,18 @@ model bancos {
   diretorio_bkp String
   
   horarios      horarios[]
-  diretorio_xml diretorios_xml[]
+  diretorios_xmls diretorios_xmls[]
 
   tenant   tenant?   @relation(fields: [id_tenant], references: [id])
   empresas empresas? @relation(fields: [id_empresa], references: [id])
 }
 
-model diretorios_xml {
+model diretorios_xmls {
   id               Int     @id @default(autoincrement())
   id_tenant        Int
-  id_diretorio_xml Int
+  id_diretorios_xmls Int
   id_bancos        Int?
-  diretorio_xml    String
+  diretorios_xmls    String
   bancos           bancos? @relation(fields: [id_bancos], references: [id])
   tenant           tenant? @relation(fields: [id_tenant], references: [id])
 }

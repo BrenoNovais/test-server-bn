@@ -2,13 +2,13 @@ import { request, Request, Response } from "express";
 import fs from 'fs'
 import supabase from "../Supabase/CreateClient";
 import prisma from "../Database/PrismaClient";
-import { bancos, diretorios_xml, horarios } from "@prisma/client";
+import { bancos, diretorios_xmls, horarios } from "@prisma/client";
 import { ExcludeManyCollums } from "../Exclude";
 
 
 interface bancosType extends bancos {
     horarios: number[]
-    diretorio_xml: string[]
+    diretorios_xmls: string[]
 }
 
 export class BackupController {
@@ -42,9 +42,9 @@ export class BackupController {
             include: {
                 bancos: {
                     include: {
-                        diretorio_xml: {
+                        diretorios_xmls: {
                             select: {
-                                diretorio_xml: true
+                                diretorios_xmls: true
                             }
                         },
                         horarios: true,
@@ -59,10 +59,11 @@ export class BackupController {
             bancos.push({
                 ...banco,
                 horarios: banco.horarios.map((horario: horarios) => horario.horario),
-                diretorio_xml: banco.diretorio_xml.map((diretorio: diretorios_xml) => diretorio.diretorio_xml)
+                diretorios_xmls: banco.diretorios_xmls.map((diretorio: diretorios_xmls) => diretorio.diretorios_xmls)
             })
         })
 
+        ExcludeManyCollums([busca_empresas], ['id', 'id_tenant'])
         ExcludeManyCollums(bancos, ['id', 'id_tenant'])
 
         return res.json({
