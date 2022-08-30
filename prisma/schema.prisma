@@ -59,7 +59,7 @@ model empresas {
 model bancos {
   id            Int              @id @default(autoincrement())
   id_tenant     Int
-  id_empresas   Int?
+  id_empresa   Int?
   id_banco      Int
   db_user       String
   db_password   String
@@ -71,7 +71,7 @@ model bancos {
   diretorio_xml diretorios_xml[]
 
   tenant   tenant?   @relation(fields: [id_tenant], references: [id])
-  empresas empresas? @relation(fields: [id_empresas], references: [id])
+  empresas empresas? @relation(fields: [id_empresa], references: [id])
 }
 
 model diretorios_xml {

@@ -65,7 +65,10 @@ export class BackupController {
 
         ExcludeManyCollums(bancos, ['id', 'id_tenant'])
 
-        return res.json(bancos)
+        return res.json({
+            ...busca_empresas,
+            bancos
+        })
     }
 }
 
