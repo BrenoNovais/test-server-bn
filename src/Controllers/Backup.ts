@@ -63,8 +63,8 @@ export class BackupController {
             })
         })
 
-        ExcludeManyCollums([busca_empresas], ['id', 'id_tenant'])
-        ExcludeManyCollums(bancos, ['id', 'id_tenant'])
+        ExcludeManyCollums([busca_empresas], ['id', 'id_tenant', 'created_at', 'updated_at'])
+        ExcludeManyCollums(bancos, ['id', 'id_tenant', 'id_banco'])
 
         return res.json({
             ...busca_empresas,
