@@ -1,0 +1,21 @@
+_id: req_839a70c6ca1b46f3b8193b91c6bee117
+type: Request
+parentId: wrk_3ad5418bda1e4d96a66b4bd4939055a4
+modified: 1663951612329
+created: 1663874761957
+url: "{{ _.URL_LOCAL }}/arquivos/breno.novais@hotmail.com"
+name: Busca Archives
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1659714885575.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

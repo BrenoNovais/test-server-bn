@@ -1,0 +1,18 @@
+_id: env_818f0a068c8841e7767a8cb0480ddd7fbc81021c
+type: Environment
+parentId: wrk_3ad5418bda1e4d96a66b4bd4939055a4
+modified: 1663942477238
+created: 1655918326807
+name: Base Environment
+data:
+  URL_LOCAL: http://localhost:3456
+  HEROKU_URL: https://teste-server-bn.herokuapp.com
+  fly: https://app-uploader.fly.dev
+dataPropertyOrder:
+  "&":
+    - URL_LOCAL
+    - HEROKU_URL
+    - fly
+color: null
+isPrivate: false
+metaSortKey: 1655918326807

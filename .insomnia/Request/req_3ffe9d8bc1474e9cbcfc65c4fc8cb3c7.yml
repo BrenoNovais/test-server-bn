@@ -1,0 +1,36 @@
+_id: req_3ffe9d8bc1474e9cbcfc65c4fc8cb3c7
+type: Request
+parentId: wrk_3ad5418bda1e4d96a66b4bd4939055a4
+modified: 1663942754683
+created: 1660679482706
+url: "{{ _.URL_LOCAL }}/upload"
+name: Archive-upload
+description: ""
+method: POST
+body:
+  mimeType: multipart/form-data
+  params:
+    - id: pair_3165f0f99c0b4989b9d92072cb7c8433
+      name: file
+      value: ""
+      description: ""
+      type: file
+      fileName: C:\Users\Notebook\Desktop\Breno\imagem\ICONES\Icon6.ico
+    - id: pair_f347c5d6eee04f948ed51785b368ccff
+      name: email
+      value: breno.novais@hotmail.com
+      description: ""
+parameters: []
+headers:
+  - name: Content-Type
+    value: multipart/form-data
+    id: pair_3dd2438e7cb14bedb0acd5f705b4189e
+authentication: {}
+metaSortKey: -1660679482706
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

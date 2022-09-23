@@ -1,0 +1,21 @@
+_id: req_917ee009b73b4d0fb251765f028cac5a
+type: Request
+parentId: wrk_3ad5418bda1e4d96a66b4bd4939055a4
+modified: 1663951603389
+created: 1663942362466
+url: "{{ _.URL_LOCAL }}"
+name: Home
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1663942362466
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

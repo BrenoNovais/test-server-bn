@@ -1,0 +1,30 @@
+_id: req_a20d4aea0aa74f988a77565161b57cb5
+type: Request
+parentId: wrk_3ad5418bda1e4d96a66b4bd4939055a4
+modified: 1663944886457
+created: 1663936407893
+url: "{{ _.fly }}/encurtalink"
+name: "encurta Links "
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: >-
+    {
+    	"link": "https://dzhspeywokdkkyhbrvcd.supabase.co/storage/v1/object/sign/archive-uploads/arquivos/breno.novais@hotmail.com/c05894ad-11fe-486c-b871-9d3c0cba4876Icon6.ico?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcmNoaXZlLXVwbG9hZHMvYXJxdWl2b3MvYnJlbm8ubm92YWlzQGhvdG1haWwuY29tL2MwNTg5NGFkLTExZmUtNDg2Yy1iODcxLTlkM2MwY2JhNDg3Nkljb242LmljbyIsImlhdCI6MTY2Mzg3NzUwNSwiZXhwIjoxNjY2NDY5NTA1fQ.QolQCguZXryjh02BoTtAwymR9jpW0mV0r3sfuvUPR-0",
+    	"email": "breno.novais@hotmail.com"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_3dd2438e7cb14bedb0acd5f705b4189e
+authentication: {}
+metaSortKey: -1659473736292.875
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

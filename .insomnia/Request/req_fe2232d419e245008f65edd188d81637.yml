@@ -1,0 +1,26 @@
+_id: req_fe2232d419e245008f65edd188d81637
+type: Request
+parentId: wrk_3ad5418bda1e4d96a66b4bd4939055a4
+modified: 1663942404837
+created: 1661188672431
+url: https://bkpmor-backend.fly.dev/api/v1/basic/empresas/id/6
+name: New Request
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: basic
+  useISO88591: false
+  disabled: false
+  username: morinfo
+  password: "@numsey1008"
+metaSortKey: -1663942362516
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

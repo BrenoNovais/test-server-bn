@@ -1,0 +1,21 @@
+_id: req_ed243518c8aa4c3ea85185f61d25f71b
+type: Request
+parentId: wrk_3ad5418bda1e4d96a66b4bd4939055a4
+modified: 1663943337554
+created: 1663935872844
+url: "{{ _.fly }}/linksencurtados/breno.novais@hotmail.com"
+name: Busca Links
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1659232587010.25
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,38 @@
+_id: req_63f227adce8b4842b430ca2180052b2b
+type: Request
+parentId: wrk_3ad5418bda1e4d96a66b4bd4939055a4
+modified: 1661793481095
+created: 1660738689847
+url: https://teste-server-bn.herokuapp.com/recebe-backup
+name: recebe-backup
+description: ""
+method: POST
+body:
+  mimeType: multipart/form-data
+  params:
+    - id: pair_fdb796f6a86e4a379053be30ccf9d03d
+      name: id_tenant
+      value: "1"
+      description: ""
+    - id: pair_b3bd66165e0b4140995970fc1793f796
+      name: anexo
+      value: ""
+      description: ""
+      type: file
+      fileName: C:\Users\Notebook\Desktop\arquivos-exemplo\testedoconfig.zip
+parameters: []
+headers: []
+authentication:
+  type: basic
+  useISO88591: false
+  disabled: true
+  username: morinfo
+  password: "@numsey1008"
+metaSortKey: -1660738689847
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
