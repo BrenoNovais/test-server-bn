@@ -1,36 +1,16 @@
 import { Request, Response } from "express";
-import multer from "multer";
 import supabase from "../Supabase/CreateClient";
 import { v4 as uuid } from "uuid"
 import fs from "fs"
 import prisma from "../Database/PrismaClient";
+import { ExcludeManyCollums } from "../Exclude";
 
-export class UsuariosController {
+export class UploadControllers {
 
     static async store(req: Request, res: Response) {
-
-        try {
-
-            await prisma.users.create({
-                data: {
-                    ...req.body
-                }
-            })
-
-            return res.json({
-                "message": "usuario registado"
-            })
-
-        } catch (error) {
-            return res.status(400).json(error)
-        }
-    }
-
-    static async store_avatar(req: Request, res: Response) {
         try {
 
             const { path, originalname, mimetype } = req.file!
-            const { id_tenant } = req.body
 
             if (!path) {
                 return res.status(400).json({
@@ -42,11 +22,11 @@ export class UsuariosController {
 
             let nome = uuid() + originalname.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z._])/g, '')
 
-            let url = `empresa/${id_tenant}/avatars/${nome}`
+            let url = `arquivos/${req.body.email ? req.body.email : 'public'}/${nome}`
 
             const { data, error } = await supabase
                 .storage
-                .from("teste-server")
+                .from("archive-uploads")
                 .upload(url, arquivo_buffer, {
                     cacheControl: '3600',
                     upsert: false,
@@ -57,19 +37,24 @@ export class UsuariosController {
                 return res.status(500).json(error)
             }
 
-            /*  LINK PRONTO P/ USO
-            const {signedURL} = await supabase
-            .storage
-            .from("avatar")
-            .createSignedUrl(url, 600)
-            await prisma.usuarios.update({
-                where: {
-                    id: Number(req.params.id),
-                },
+            const { signedURL } = await supabase
+                .storage
+                .from("archive-uploads")
+                .createSignedUrl(url, 2592000)
+
+
+            if (!signedURL) {
+                return res.status(500).json(error)
+            }
+
+            await prisma.arquivos.create({
                 data: {
-                    avatar: url
+                    nome: originalname,
+                    caminho: url,
+                    link_download: signedURL,
+                    email: req.body.email ? req.body.email : 'public'
                 }
-            }) */
+            })
 
             fs.unlink(path, ((err: any) => {
                 if (err) console.log(err);
@@ -79,11 +64,38 @@ export class UsuariosController {
             }));
 
             return res.json({
-                "message": "salvo"
+                "message": signedURL
             })
 
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    static async show(req: Request, res: Response) {
+
+        try {
+            
+            const {email} = req.params
+
+        if (!email || email === 'public') {
+            return res.status(400).json({
+                "message": "nenhum arquivo encontrado"
+            })
+        }
+
+        const busca_arquivos = await prisma.arquivos.findMany({
+            where: {
+                email: email
+            }
+        })
+
+        ExcludeManyCollums(busca_arquivos, ['caminho', 'email'])
+        
+        return res.status(200).json(busca_arquivos)
+
+        } catch (error) {
+            return res.status(500).json(error)
         }
     }
 }

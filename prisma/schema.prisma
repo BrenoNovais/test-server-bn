@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,87 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model tenant {
-  id      Int        @id @default(autoincrement())
-  nome    String
-  cnpj    String     @unique @db.VarChar(14)
-  users   Users[]
-  backups empresas[]
-
-  created_at     DateTime         @default(now())
-  updated_at     DateTime         @updatedAt
-  bancos         bancos[]
-  diretorios_xmls diretorios_xmls[]
-  horarios       horarios[]
+model arquivos {
+  id            Int      @id @default(autoincrement())
+  nome          String   @default("")
+  caminho       String
+  link_download String
+  email         String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 }
 
-model Users {
-  id        Int     @id @default(autoincrement())
-  id_tenant Int
-  id_user   Int?
-  nome      String
-  email     String  @unique
-  senha     String
-  avatar    String? @default("public/avatarpadrao.jpg")
-  tenant    tenant? @relation(fields: [id_tenant], references: [id])
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  @@unique([id, id_tenant])
-  @@unique([id_user, id_tenant])
-}
-
-model empresas {
-  id          Int      @id @default(autoincrement())
-  id_tenant   Int
-  id_empresas Int?
-  nome        String
-  bancos      bancos[]
-  tenant      tenant?  @relation(fields: [id_tenant], references: [id])
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  @@unique([id, id_tenant])
-  @@unique([id_empresas, id_tenant])
-}
-
-model bancos {
-  id            Int              @id @default(autoincrement())
-  id_tenant     Int
-  id_empresa   Int?
-  id_banco      Int
-  db_user       String
-  db_password   String
-  db_name       String
-  qtde_dias_bkp Int
-  diretorio_bkp String
-  
-  horarios      horarios[]
-  diretorios_xmls diretorios_xmls[]
-
-  tenant   tenant?   @relation(fields: [id_tenant], references: [id])
-  empresas empresas? @relation(fields: [id_empresa], references: [id])
-}
-
-model diretorios_xmls {
-  id               Int     @id @default(autoincrement())
-  id_tenant        Int
-  id_diretorios_xmls Int
-  id_bancos        Int?
-  diretorios_xmls    String
-  bancos           bancos? @relation(fields: [id_bancos], references: [id])
-  tenant           tenant? @relation(fields: [id_tenant], references: [id])
-}
-
-model horarios {
-  id         Int     @id @default(autoincrement())
-  id_tenant  Int
-  id_horario Int
-  horario    Int
-  bancos     bancos? @relation(fields: [id_bancos], references: [id])
-  id_bancos  Int?
-
-  tenant tenant? @relation(fields: [id_tenant], references: [id])
+model links {
+  id             Int      @id @default(autoincrement())
+  nome           String?
+  link_original  String
+  link_encurtado String
+  email          String
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
 }
